@@ -4,11 +4,19 @@ module Nebula
     attr_reader :total_nodes
     
     def initialize(args={})
+      @total_nodes = 0
+      @nodes = []
     end
     
     
     def self.generate(node_count)
       
+    end
+    
+    def spawn_node
+      @nodes << Node.new(:id => @total_nodes)
+      @total_nodes += 1
+      @nodes.last
     end
     
   end
