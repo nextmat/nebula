@@ -37,6 +37,11 @@ class TestNetwork < Test::Unit::TestCase
       @network.spawn_node
       assert @network.nodes[0].is_a?(Nebula::Node)
     end
+    
+    should 'ensure hash access is consistent with node id' do
+      4.times { @network.spawn_node }
+      assert_equal 2, @network.nodes[2].id
+    end
   end
 
 end
