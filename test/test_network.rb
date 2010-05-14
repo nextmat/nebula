@@ -22,6 +22,11 @@ class TestNetwork < Test::Unit::TestCase
           @network.spawn_node
         end
       end
+      
+      should 'ensure node id is set' do
+        @network.spawn_node
+        assert_equal @network.total_nodes-1, @network.nodes.last.id
+      end
     end
     
     should 'link nodes after their creation' do
@@ -29,7 +34,8 @@ class TestNetwork < Test::Unit::TestCase
     end
     
     should 'provide hash-like access to nodes' do
-      
+      @network.spawn_node
+      assert @network.nodes[0].is_a?(Nebula::Node)
     end
   end
 

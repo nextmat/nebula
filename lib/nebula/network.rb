@@ -2,6 +2,7 @@ module Nebula
 
   class Network
     attr_reader :total_nodes
+    attr_reader :nodes
     
     def initialize(args={})
       @total_nodes = 0
