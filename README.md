@@ -1,5 +1,5 @@
-ProxyMachine
-============
+Nebula
+======
 
 By Matt Sanders (matt@polycot.com)
 
