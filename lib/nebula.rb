@@ -7,5 +7,4 @@ require 'nebula/network_type'
 require 'nebula/network_types/random'
 
 module Nebula
-  
 end

@@ -109,6 +109,5 @@ class TestNetwork < Test::Unit::TestCase
       @network.spawn_nodes(2, :test_arg => 'test')
     end
   end
-  
 
 end

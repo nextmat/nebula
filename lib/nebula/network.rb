@@ -7,9 +7,9 @@ module Nebula
       @nodes = NodeList.new
     end
     
-    def self.generate(node_count, options={})
-      
-    end
+    ## Maybe implement later
+    # def self.generate(node_count, options={})
+    # end
     
     def spawn_node(options={})
       node = Node.new(:id => options[:id] || self.nodes.count)
