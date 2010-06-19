@@ -69,6 +69,21 @@ class TestNetwork < Test::Unit::TestCase
       # should 'raise error if node exists at that id' do
       # end
       
+      context "which is smaller than a previous node" do
+        setup do
+          @count = @network.total_nodes
+          @node = @network.spawn_node(:id => 43)
+        end
+
+        should 'return proper node' do
+          assert_equal 43, @node.id
+        end
+        
+        should 'keep proper count' do
+          assert_equal @count+1, @network.total_nodes
+        end
+      end
+      
     end
   end
   

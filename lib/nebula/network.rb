@@ -1,11 +1,9 @@
 module Nebula
 
   class Network
-    attr_reader :total_nodes
     attr_reader :nodes
     
     def initialize(args={})
-      @total_nodes = 0
       @nodes = NodeList.new
     end
     
@@ -14,10 +12,13 @@ module Nebula
     end
     
     def spawn_node(options={})
-      node = Node.new(:id => options[:id] || @total_nodes)
+      node = Node.new(:id => options[:id] || self.nodes.count)
       @nodes[node.id] = node
-      @total_nodes += 1
-      @nodes.last
+      node
+    end
+    
+    def total_nodes
+      self.nodes.count
     end
     
     def spawn_nodes(count, options={})
