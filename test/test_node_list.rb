@@ -15,6 +15,68 @@ class TestNodeList < Test::Unit::TestCase
       end
     end
   end
+  
+  context "Creating a node" do
+    setup do
+      @network = Nebula::Network.new
+      @node_list = @network.nodes
+    end
+    
+    should 'be possible' do
+      node = @node_list.create
+      assert node.is_a?(Nebula::Node)
+    end
+    
+    should 'update node count' do
+      assert_difference '@node_list.count' do
+        @node_list.create
+      end
+    end
+    
+    should 'ensure node id is set' do
+      node = @node_list.create
+      assert_not_nil node.id
+    end
+    
+    context "with a specific id" do
+      setup do
+        @count = @node_list.count
+        @node_list.create(:id => 213)
+      end
+
+      should 'be created' do
+        assert @node_list[213].is_a?(Nebula::Node)
+      end
+      
+      should 'know its proper id' do
+        assert @node_list[213].id == 213
+      end
+      
+      should 'still have accurate node count' do
+        assert_equal @count+1, @node_list.count
+      end
+      
+      ## Maybe TODO
+      # should 'raise error if node exists at that id' do
+      # end
+      
+      context "which is smaller than a previous node" do
+        setup do
+          @count = @node_list.count
+          @node = @node_list.create(:id => 43)
+        end
+
+        should 'return proper node' do
+          assert_equal 43, @node.id
+        end
+        
+        should 'keep proper count' do
+          assert_equal @count+1, @node_list.count
+        end
+      end
+      
+    end
+  end
 
   context "Counting nodes" do
     setup do

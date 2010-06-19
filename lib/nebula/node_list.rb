@@ -8,8 +8,10 @@ module Nebula
       @network = options[:network]
     end
     
-    def create
-      
+    def create(options={})
+      node = Node.new(:id => options[:id] || self.count)
+      self[node.id] = node
+      node
     end
     
     def count

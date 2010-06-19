@@ -12,9 +12,7 @@ module Nebula
     # end
     
     def spawn_node(options={})
-      node = Node.new(:id => options[:id] || self.nodes.count)
-      @nodes[node.id] = node
-      node
+      self.nodes.create(options)
     end
     
     def total_nodes

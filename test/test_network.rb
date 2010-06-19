@@ -26,64 +26,15 @@ class TestNetwork < Test::Unit::TestCase
     end
   end
   
-  context "spawning a node" do
+  context "creating a node" do
     setup do
       @network = Nebula::Network.new
     end
-    
-    should 'be possible' do
-      node = @network.spawn_node
-      assert @network.spawn_node.is_a?(Nebula::Node)
-    end
-    
-    should 'update node count' do
+
+    should 'be able to create' do
       assert_difference '@network.total_nodes' do
         @network.spawn_node
       end
-    end
-    
-    should 'ensure node id is set' do
-      @network.spawn_node
-      assert_equal @network.total_nodes-1, @network.nodes.last.id
-    end
-    
-    context "with a specific id" do
-      setup do
-        @count = @network.total_nodes
-        @network.spawn_node(:id => 213)
-      end
-
-      should 'be created' do
-        assert @network.nodes[213].is_a?(Nebula::Node)
-      end
-      
-      should 'know its proper id' do
-        assert @network.nodes[213].id == 213
-      end
-      
-      should 'still have accurate node count' do
-        assert_equal @count+1, @network.total_nodes
-      end
-      
-      ## Maybe TODO
-      # should 'raise error if node exists at that id' do
-      # end
-      
-      context "which is smaller than a previous node" do
-        setup do
-          @count = @network.total_nodes
-          @node = @network.spawn_node(:id => 43)
-        end
-
-        should 'return proper node' do
-          assert_equal 43, @node.id
-        end
-        
-        should 'keep proper count' do
-          assert_equal @count+1, @network.total_nodes
-        end
-      end
-      
     end
   end
   
