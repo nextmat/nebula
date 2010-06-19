@@ -11,9 +11,9 @@ class TestNetwork < Test::Unit::TestCase
       assert_equal 0, @network.total_nodes
     end
 
-    should 'link nodes after their creation' do
-      #TODO
-    end
+    ## Maybe TODO
+    # should 'link nodes after their creation' do
+    # end
     
     should 'provide hash-like access to nodes' do
       @network.spawn_node
@@ -45,6 +45,30 @@ class TestNetwork < Test::Unit::TestCase
     should 'ensure node id is set' do
       @network.spawn_node
       assert_equal @network.total_nodes-1, @network.nodes.last.id
+    end
+    
+    context "with a specific id" do
+      setup do
+        @count = @network.total_nodes
+        @network.spawn_node(:id => 213)
+      end
+
+      should 'be created' do
+        assert @network.nodes[213].is_a?(Nebula::Node)
+      end
+      
+      should 'know its proper id' do
+        assert @network.nodes[213].id == 213
+      end
+      
+      should 'still have accurate node count' do
+        assert_equal @count+1, @network.total_nodes
+      end
+      
+      ## Maybe TODO
+      # should 'raise error if node exists at that id' do
+      # end
+      
     end
   end
   
