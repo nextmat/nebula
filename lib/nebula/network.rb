@@ -6,7 +6,7 @@ module Nebula
     
     def initialize(args={})
       @total_nodes = 0
-      @nodes = []
+      @nodes = NodeList.new
     end
     
     def self.generate(node_count, options={})
