@@ -4,7 +4,7 @@ module Nebula
     attr_reader :nodes
     
     def initialize(args={})
-      @nodes = NodeList.new(:network => self)
+      @nodes = NodeCollection.new(:network => self)
     end
     
     ## Maybe implement later

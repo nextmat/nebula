@@ -1,6 +1,6 @@
 module Nebula
 
-  class NodeList < Array
+  class NodeCollection < Array
     
     attr_reader :network
     
