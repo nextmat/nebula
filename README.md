@@ -7,16 +7,23 @@ By Matt Sanders (matt@polycot.com)
 Description
 -----------
 
-Nebula is a library for generating models of social networks. This is a work in progress, more info as appropriate...
+Nebula is a library for analyzing contact networks. This is a work in progress, more info as appropriate...
 
 Usage
 -----
 
-    network = Nebula::Network.generate(500)       # generate a 500 node network
-    network[100].neighbors.ids                    # array of connection ids for node 101
-    network.spawn_nodes(50)                       # add 50 nodes to network
-    network.spawn_node(:neighbors => [5,10])      # spawn a new node with preset neighbors
-    network.spawn_node(:neighbor_count => 3..5)   # ensure new node has 5 neighbors
+    network = Nebula::Network.new
+    sally = network.nodes.create              # create a new node (sally) with next available id
+    ralph = network.nodes.create(:id => 5)    # create a new node (ralph) with a specified id
+    ralph.add_contacts(7,10,12)               # add connections to ralph, new nodes will be created
+                                              # if needed and recursively linked
+                                              
+    ralph.contacts                            # list ralph's contacts
+    ralph.add_contact(sally)                  # contacts can be added by id or by node itself
+    ralph.remove_contact(10)                  
+    ralph.contacts.count
+    
+    network.nodes.count                       # number of total nodes in the network
 
 Copyright
 ---------
